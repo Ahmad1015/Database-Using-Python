@@ -1,3 +1,4 @@
+from Print_Write import Print_Write
 class SQLParser:
     def __init__(self, db):
         self.db = db
@@ -49,9 +50,13 @@ class SQLParser:
             self.db.insert_into(tree["table"], tree["values"])
         elif tree["command"] == "SELECT":
             result = self.db.select_from(tree["table"], tree["columns"], tree.get("where"))
-            print(result)
+
+            pw = Print_Write(result,self.db.tables[tree['table']]['columns'])
+            pw.write_tsv(tree['table'])
+
         elif tree["command"] == "DELETE":
-            result = self.db.delete_from(tree["table"], tree.get("where"))
-            print(result)
+            self.db.delete_from(tree["table"], tree.get("where"))
+
+
 
 
