@@ -10,6 +10,7 @@ class Database:
             values = [value.strip("'") for value in values]
             row = {column: value for column, value in zip(self.tables[table_name]["columns"], values)}
             self.tables[table_name]["rows"].append(row)
+            return self.tables[table_name]["rows"]
         else:
             raise ValueError(f"Table '{table_name}' does not exist.")
 
@@ -64,4 +65,4 @@ class Database:
         else:
             raise ValueError(f"Table '{table_name}' does not exist.")
 
-
+        return self.tables[table_name]["rows"]

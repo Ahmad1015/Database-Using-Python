@@ -10,7 +10,8 @@ class SQLParser:
             command = command[:-1]
         tokens = self.split_into_parts(command)
         tree = self.parse(tokens)
-        self.solver(tree)
+        return self.solver(tree)
+
 
     def split_into_parts(self, command):
         return command.split()
@@ -45,12 +46,23 @@ class SQLParser:
         if tree["command"] == "CREATE":
             self.db.create_table(tree["table"], tree["columns"])
         elif tree["command"] == "INSERT":
-            self.db.insert_into(tree["table"], tree["values"])
+            result = self.db.insert_into(tree["table"], tree["values"])
+            pw = Print_Write(result, self.db.tables[tree['table']]['columns'])
+            result = pw.write_tsv(tree['table'])
+            return result
+
         elif tree["command"] == "SELECT":
             result = self.db.select_from(tree["table"], tree["columns"], tree.get("where"))
 
+
             pw = Print_Write(result,self.db.tables[tree['table']]['columns'])
-            pw.write_tsv(tree['table'])
+            result = pw.write_tsv(tree['table'])
+
+            return result
 
         elif tree["command"] == "DELETE":
-            self.db.delete_from(tree["table"], tree.get("where"))
+            result = self.db.delete_from(tree["table"], tree.get("where"))
+            pw = Print_Write(result, self.db.tables[tree['table']]['columns'])
+            result = pw.write_tsv(tree['table'])
+
+            return result

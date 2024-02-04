@@ -9,5 +9,5 @@ class Starting_File:
         self.parser = SQLParser(self.db)
 
     def get_input(self,SQL):
-        self.parser.handle(SQL)
+        return self.parser.handle(SQL)
 

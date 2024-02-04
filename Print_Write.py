@@ -27,8 +27,9 @@ class Print_Write:
         return output
     
     def print(self):
-       output = self.common_Code()
-       print(output)
+        output = self.common_Code()
+        print(output)
+        return output
 
     
     def write_tsv(self,table_name):
@@ -38,6 +39,7 @@ class Print_Write:
         with open(table_name, 'w') as f:
             f.write(output)
         print("Written Successfully to the File")
+        return output
 
 
 
