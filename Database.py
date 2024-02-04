@@ -30,7 +30,7 @@ class Database:
             raise ValueError(f"Table '{table_name}' does not exist.")
 
     def solve_where(self, where,row):
-        operators = ['>=', '<=', '>', '<', '==']
+        operators = ['>=', '<=', '>', '<', '=']
         for op in operators:
             if op in where:
                 name, condition = where.split(op)
@@ -43,9 +43,11 @@ class Database:
                 value = row[key]
                 if datatype == 'INT':
                     value = int(value)
+                    condition = int(condition)
                 elif datatype == 'FLOAT':
                     value = float(value)
-                condition = int(condition)
+                    condition = float(condition)
+                # If datatype is STRING, no need to typecast
                 if op == '>=':
                     return value >= condition
                 elif op == '<=':
@@ -54,7 +56,7 @@ class Database:
                     return value > condition
                 elif op == '<':
                     return value < condition
-                elif op == '==':
+                elif op == '=':
                     return value == condition
         return "Name not found in the dictionary"
 
@@ -67,4 +69,4 @@ parser = SQLParser(db)
 parser.handle("CREATE TABLE customers (id INT, name STRING, email STRING)")
 parser.handle("INSERT INTO customers VALUES (1, 'John Doe', 'johndoe@example.com')")
 parser.handle("INSERT INTO customers VALUES (2, 'Jane Doe', 'janedoe@example.com')")
-parser.handle("SELECT * FROM customers WHERE id > 1")
+parser.handle("SELECT * FROM customers WHERE name = John Doe")
