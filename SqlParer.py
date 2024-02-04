@@ -56,7 +56,3 @@ class SQLParser:
 
         elif tree["command"] == "DELETE":
             self.db.delete_from(tree["table"], tree.get("where"))
-
-
-
-
