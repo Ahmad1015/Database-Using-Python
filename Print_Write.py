@@ -35,7 +35,6 @@ class Print_Write:
     def write_tsv(self,table_name):
         table_name = table_name+".txt"
         output = self.common_Code()
-        print(output)
         with open(table_name, 'w') as f:
             f.write(output)
         print("Written Successfully to the File")
