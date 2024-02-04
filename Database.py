@@ -73,5 +73,5 @@ parser = SQLParser(db)
 parser.handle("CREATE TABLE customers (id INT, name STRING, email STRING)")
 parser.handle("INSERT INTO customers VALUES (1, 'John Doe', 'johndoe@example.com')")
 parser.handle("INSERT INTO customers VALUES (2, 'Jane Doe', 'janedoe@example.com')")
-parser.handle("DELETE FROM customers WHERE email = janedoe@example.com;")
+
 parser.handle("SELECT * FROM customers")
