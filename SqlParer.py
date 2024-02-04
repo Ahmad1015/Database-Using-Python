@@ -26,7 +26,7 @@ class SQLParser:
             values_string = ' '.join(tokens[4:]).rstrip(',')
             tree["values"] = [value.strip() for value in values_string.replace('(', '').replace(')', '').split(',') if value]
         elif tree["command"] == "SELECT":
-            if tokens[1].contains("*"):
+            if "*" in tokens[1]:
                 tree["columns"] = "*"
             else:
                 tree["columns"] = tokens[1].split(",")

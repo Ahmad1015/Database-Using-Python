@@ -8,9 +8,12 @@ class API:
     def talk(self):
         self.data = "Can you just give me  SQL to create a table called Customers with ID , name , email as columns, After that give me SQL to add 2 different entries and then display everything in that Table.Just give me the sql lines, dont give me any character apart from it"
         result = self.get_data(self.data)
-        print(result)
+        temp = result.split(";")
+        temp = [x for x in temp if len(x) >= 3]
         ss = Starting_File()
-        ss.get_input(result)
+        for item in temp:
+            item = item.lstrip()
+            ss.get_input(item)
 
 
     def get_data(self,data):
