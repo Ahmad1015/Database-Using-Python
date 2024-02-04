@@ -1,9 +1,12 @@
-
 class SQLParser:
     def __init__(self, db):
         self.db = db
 
     def handle(self, command):
+        command = command.strip()
+        command = command.strip()
+        if command.endswith(';'):
+            command = command[:-1]
         tokens = self.tokenize(command)
         tree = self.parse(tokens)
         self.interpret(tree)
@@ -32,6 +35,11 @@ class SQLParser:
             if "WHERE" in tokens:
                 where_index = tokens.index("WHERE")
                 tree["where"] = ' '.join(tokens[where_index + 1:])
+        elif tree["command"] == "DELETE":
+            tree["table"] = tokens[2]
+            if "WHERE" in tokens:
+                where_index = tokens.index("WHERE")
+                tree["where"] = ' '.join(tokens[where_index + 1:])
         return tree
 
     def interpret(self, tree):
@@ -41,6 +49,9 @@ class SQLParser:
             self.db.insert_into(tree["table"], tree["values"])
         elif tree["command"] == "SELECT":
             result = self.db.select_from(tree["table"], tree["columns"], tree.get("where"))
+            print(result)
+        elif tree["command"] == "DELETE":
+            result = self.db.delete_from(tree["table"], tree.get("where"))
             print(result)
 
 
