@@ -60,8 +60,12 @@ class Database:
                     return value == condition
         return "Name not found in the dictionary"
 
-
-
+    def delete_from(self, table_name, where=None):
+        if table_name in self.tables:
+            self.tables[table_name]["rows"] = [row for row in self.tables[table_name]["rows"] if
+                                               not (where is None or self.solve_where(where, row))]
+        else:
+            raise ValueError(f"Table '{table_name}' does not exist.")
 
 
 db = Database()
@@ -69,4 +73,5 @@ parser = SQLParser(db)
 parser.handle("CREATE TABLE customers (id INT, name STRING, email STRING)")
 parser.handle("INSERT INTO customers VALUES (1, 'John Doe', 'johndoe@example.com')")
 parser.handle("INSERT INTO customers VALUES (2, 'Jane Doe', 'janedoe@example.com')")
-parser.handle("SELECT * FROM customers WHERE name = John Doe")
+parser.handle("DELETE FROM customers WHERE email = janedoe@example.com;")
+parser.handle("SELECT * FROM customers")
