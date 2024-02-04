@@ -47,14 +47,6 @@ class Print_Write:
                 output =output+ item+'\t'
             output = output.rstrip("\t")  # Remove the trailing tab
             output += "\n"
-        print(output)
+
         with open(table_name, 'w') as f:
             f.write(output)
-
-
-
-
-
-
-
-
