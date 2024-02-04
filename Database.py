@@ -1,6 +1,5 @@
 from SqlParer import SQLParser
 
-
 class Database:
     def __init__(self):
         self.tables = {}
