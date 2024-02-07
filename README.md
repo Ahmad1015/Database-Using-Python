@@ -15,5 +15,5 @@ To use PyGPT-DBManager, send a natural language query as a string via a POST req
 The private GPT LLM is not included in this repository due to its proprietary nature.
 
 ## Contributions
-Contributions are welcome! Please read the contributing guidelines before making any changes.
+Contributions are welcome!
 
